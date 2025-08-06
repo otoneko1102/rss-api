@@ -50,7 +50,7 @@ router.get("/", async (req, res) => {
       const seconds = String(updatedAt.getUTCSeconds()).padStart(2, "0");
       const timestamp = `${year}${month}${day}.${hours}${minutes}${seconds}`;
 
-      const title = `${repo.name}@${timestamp}`;
+      const title = `${repo.name} v${timestamp}`;
 
       feed.item({
         title: title,
