@@ -4,6 +4,20 @@ Unofficial RSS feeds for various services.
 
 ## Available endpoints
 
+### GitHub User Repositories
+
+Returns an RSS feed based on a list of public repository for GitHub users.
+
+::: description
+
+Endpoint `/api/github`  
+Method:`GET`  
+Param:
+- `user<string>` - GitHub Username
+- `language<string | null>` - Language Code
+
+:::
+
 ### NPM User Packages
 
 Returns an RSS feed of a user's NPM packages.
@@ -12,6 +26,8 @@ Returns an RSS feed of a user's NPM packages.
 
 Endpoint: `/api/npm`  
 Method: `GET`  
-Param: `id<string>` - NPM Username
+Param:
+- `user<string>` - NPM Username
+- `language<string | null>` - Language Code
 
 :::
