@@ -4,6 +4,7 @@ const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
 
+const { API_DOMAIN } = require("./src/lib/config");
 const apiRoutes = require("./src/routes/api");
 
 const app = express();
@@ -11,9 +12,11 @@ const port = process.env.PORT || 3000;
 
 const MarkDownIt = require("markdown-it");
 const mdContainer = require("markdown-it-container");
+const mdAttrs = require("markdown-it-attrs");
 
 const md = MarkDownIt({ html: true });
 md.use(mdContainer, "description");
+md.use(mdAttrs);
 
 app.use(cors({ origin: "*" }));
 app.use(express.json());
@@ -31,7 +34,12 @@ app.get("/", (req, res) => {
       "utf-8"
     );
 
-    const contentHtml = md.render(markdownContent);
+    const finalMarkdownContent = markdownContent.replace(
+      /%API_DOMAIN%/g,
+      API_DOMAIN
+    );
+
+    const contentHtml = md.render(finalMarkdownContent);
 
     const finalHtml = htmlTemplate.replace(
       "<main></main>",

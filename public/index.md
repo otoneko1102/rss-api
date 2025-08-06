@@ -2,6 +2,13 @@
 
 Unofficial RSS feeds for various services.
 
+## API URL
+
+
+``` {.code-container}
+%API_DOMAIN%
+```
+
 ## Available endpoints
 
 ### GitHub User Repositories

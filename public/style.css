@@ -6,13 +6,6 @@ body {
   margin: 0 auto;
 }
 
-code {
-  background-color: #f0f0f0;
-  padding: 0.2em 0.4em;
-  border-radius: 4px;
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-}
-
 h1,
 h2 {
   border-bottom: 2px solid #eee;
@@ -33,4 +26,54 @@ a:hover {
   padding: 20px;
   border-radius: 15px;
   box-shadow: 12px 12px 2px 1px rgba(0, 0, 0, 0.5);
+}
+
+pre {
+  position: relative;
+  background-color: #cdcdcd;
+  border: 1px solid #eee;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
+  box-shadow: 12px 12px 2px 1px rgba(0, 0, 0, 0.5);
+}
+
+code {
+  font-family: monospace;
+}
+
+code.code-container {
+  font-size: 14px;
+  background: none;
+}
+
+.copy-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 6px 12px;
+  background-color: #ffffff;
+  color: #333333;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+pre:hover .copy-button {
+  opacity: 1;
+}
+
+.copy-button:hover {
+  background-color: #f0f0f0;
+  border-color: #cccccc;
+}
+
+.copy-button.copied {
+  background-color: #007bff;
+  color: #ffffff;
+  border-color: #007bff;
 }
