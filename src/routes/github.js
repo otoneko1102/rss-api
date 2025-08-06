@@ -14,22 +14,9 @@ router.get("/", async (req, res) => {
     if (!user) {
       return res.status(400).json({
         error:
-          'Username is required. Please use "user" query parameter (e.g., /api/github?user=USERNAME)',
+          'Username is required. Please use the "user" query parameter (e.g., /api/github?user=USERNAME)',
       });
     }
-
-    const reposUrl = `https://api.github.com/users/${user}/repos?sort=updated&direction=desc`;
-    const reposResponse = await fetch(reposUrl, {
-      headers: { "User-Agent": "RSS-API-Server" },
-    });
-
-    if (!reposResponse.ok) {
-      throw new Error(
-        `Failed to fetch data from GitHub API: ${reposResponse.statusText}`
-      );
-    }
-
-    const repos = await reposResponse.json();
 
     const feed = new RSS({
       title: `GitHub Repositories by ${user}`,
@@ -39,33 +26,48 @@ router.get("/", async (req, res) => {
       language: language || "en",
     });
 
-    for (const repo of repos) {
-      const updatedAt = new Date(repo.updated_at);
+    const url = `https://api.github.com/users/${user}/repos?sort=updated&direction=desc`;
+    const response = await fetch(url, {
+      headers: { "User-Agent": "RSS-API" },
+    });
 
-      const year = updatedAt.getUTCFullYear();
-      const month = String(updatedAt.getUTCMonth() + 1).padStart(2, "0");
-      const day = String(updatedAt.getUTCDate()).padStart(2, "0");
-      const hours = String(updatedAt.getUTCHours()).padStart(2, "0");
-      const minutes = String(updatedAt.getUTCMinutes()).padStart(2, "0");
-      const seconds = String(updatedAt.getUTCSeconds()).padStart(2, "0");
-      const timestamp = `${year}${month}${day}.${hours}${minutes}${seconds}`;
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch data from GitHub API: ${response.statusText}`
+      );
+    }
 
-      const title = `${repo.name} v${timestamp}`;
+    const data = await response.json();
 
-      feed.item({
-        title: title,
-        description: repo.description || "No description provided.",
-        url: repo.html_url,
-        guid: `${repo.id}-${repo.updated_at}`,
-        date: updatedAt,
-      });
+    if (data) {
+      for (const obj of data) {
+        const updatedAt = new Date(obj.updated_at);
+
+        const year = updatedAt.getUTCFullYear();
+        const month = String(updatedAt.getUTCMonth() + 1).padStart(2, "0");
+        const day = String(updatedAt.getUTCDate()).padStart(2, "0");
+        const hours = String(updatedAt.getUTCHours()).padStart(2, "0");
+        const minutes = String(updatedAt.getUTCMinutes()).padStart(2, "0");
+        const seconds = String(updatedAt.getUTCSeconds()).padStart(2, "0");
+        const timestamp = `${year}${month}${day}.${hours}${minutes}${seconds}`;
+
+        const title = `${obj.name} v${timestamp}`;
+
+        feed.item({
+          title: title,
+          description: obj.description || "No description provided.",
+          url: obj.html_url,
+          guid: `${obj.id}@${obj.updated_at}`,
+          date: updatedAt,
+        });
+      }
     }
 
     const xml = feed.xml({ indent: true });
     res.type("application/rss+xml").send(xml);
   } catch (error) {
-    console.error("Failed to generate GitHub RSS feed:", error);
-    res.status(500).json({ error: "Error generating GitHub RSS feed" });
+    console.error("Failed to generate RSS feed:", error);
+    res.status(500).json({ error: "Error generating RSS feed" });
   }
 });
 
