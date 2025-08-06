@@ -1,34 +1,32 @@
 const express = require("express");
 const RSS = require("rss");
-const router = express.Router();
 const fetch = require("node-fetch");
-
-const API_DOMAIN =
-  process.env.DOMAIN || `http://localhost:${process.env.PORT || 3000}`;
+const { API_DOMAIN } = require("../lib/config");
+const router = express.Router();
 
 /**
- * GET /?id=USERNAME
+ * GET /?user=USERNAME&language=LANGUAGE
  * Returns an RSS feed of a user's NPM packages.
  */
 router.get("/", async (req, res) => {
   try {
-    const username = req.query.id;
-    if (!username) {
+    const { user, language } = req.query;
+    if (!user) {
       return res.status(400).json({
         error:
-          'Username is required. Please use the "id" query parameter (e.g., /api/npm?id=USERNAME)',
+          'Username is required. Please use the "user" query parameter (e.g., /api/npm?user=USERNAME)',
       });
     }
 
     const feed = new RSS({
-      title: `NPM Packages by ${username}`,
-      description: `Latest packages published by ${username} on npm.`,
-      feed_url: `${API_DOMAIN}/api/npm?id=${username}`,
-      site_url: `https://www.npmjs.com/~${username}`,
-      language: "ja",
+      title: `NPM Packages by ${user}`,
+      description: `Latest packages published by ${user} on npm.`,
+      feed_url: `${API_DOMAIN}/api/npm?id=${user}`,
+      site_url: `https://www.npmjs.com/~${user}`,
+      language: language || "en",
     });
 
-    const url = `https://registry.npmjs.org/-/v1/search?text=author:${username}`;
+    const url = `https://registry.npmjs.org/-/v1/search?text=author:${user}`;
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(
