@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
       });
     }
 
-    const url = `https://api.github.com/users/${user}/repos?sort=created&direction=desc`;
+    const url = `https://api.github.com/users/${user}/repos?sort=pushed&direction=desc`;
     const response = await fetch(url, {
       headers: { "User-Agent": "RSS-API-Server" },
     });
@@ -44,7 +44,7 @@ router.get("/", async (req, res) => {
         description: repo.description || "No description provided.",
         url: repo.html_url,
         guid: repo.id,
-        date: new Date(repo.created_at),
+        date: new Date(repo.pushed_at),
       });
     }
 
