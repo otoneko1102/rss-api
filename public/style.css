@@ -39,6 +39,14 @@ pre {
   box-shadow: 12px 12px 2px 1px rgba(0, 0, 0, 0.5);
 }
 
+code {
+  font-family: monospace;
+  background-color: #dddddd;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+}
+
 code.code-container {
   font-size: 14px;
   background: none;
