@@ -40,7 +40,7 @@ router.get("/", async (req, res) => {
         feed.item({
           title: `${obj.package.name} v${obj.package.version}`,
           description: obj.package.description || "No description provided.",
-          url: `${obj.package.links.npm}/v/${obj.package.version}`,
+          url: `${obj.package.links.npm}/v/${obj.package.version}/`,
           guid: `${obj.package.name}@${obj.package.version}`,
           date: new Date(obj.package.date),
         });
