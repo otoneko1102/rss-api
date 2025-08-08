@@ -21,6 +21,10 @@ a:hover {
   text-decoration: underline;
 }
 
+pre, .description {
+  margin-bottom: 20px;
+}
+
 .description {
   background-color: #cdcdcd;
   line-height: 2;
