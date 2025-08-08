@@ -56,7 +56,7 @@ router.get("/", async (req, res) => {
         feed.item({
           title: title,
           description: obj.description || "No description provided.",
-          url: obj.html_url,
+          url: `${obj.html_url}?updated_at=${obj.updated_at}`,
           guid: `${obj.id}@${obj.updated_at}`,
           date: updatedAt,
         });
