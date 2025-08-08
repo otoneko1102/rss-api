@@ -5,12 +5,12 @@ const { API_DOMAIN } = require("../lib/config");
 const router = express.Router();
 
 /**
- * GET /?user=USERNAME&language=LANGUAGE
+ * GET /?user=USERNAME
  * Returns an RSS feed of a user's NPM packages.
  */
 router.get("/", async (req, res) => {
   try {
-    const { user, language } = req.query;
+    const { user } = req.query;
     if (!user) {
       return res.status(400).json({
         error:
@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
       description: `Latest packages published by ${user} on npm.`,
       feed_url: `${API_DOMAIN}/api/npm?id=${user}`,
       site_url: `https://www.npmjs.com/~${user}`,
-      language: language || "en",
+      language: "en",
     });
 
     const url = `https://registry.npmjs.org/-/v1/search?text=author:${user}`;

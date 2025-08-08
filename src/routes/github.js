@@ -5,12 +5,12 @@ const { API_DOMAIN } = require("../lib/config");
 const router = express.Router();
 
 /**
- * GET /?user=USERNAME&language=LANGUAGE
+ * GET /?user=USERNAME
  * Returns an RSS feed based on a list of public repository for GitHub users.
  */
 router.get("/", async (req, res) => {
   try {
-    const { user, language } = req.query;
+    const { user } = req.query;
     if (!user) {
       return res.status(400).json({
         error:
@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
       description: `Latest public repositories by ${user} on GitHub.`,
       feed_url: `${API_DOMAIN}/api/github?user=${user}`,
       site_url: `https://github.com/${user}`,
-      language: language || "en",
+      language: "en",
     });
 
     const url = `https://api.github.com/users/${user}/repos?sort=updated&direction=desc`;
