@@ -45,15 +45,19 @@ pre, .description {
   box-shadow: 12px 12px 2px 1px rgba(0, 0, 0, 0.5);
 }
 
-pre {
+.code-wrapper {
   position: relative;
+  margin-bottom: 20px;
+}
+
+pre {
   background-color: #cdcdcd;
   border: 1px solid #eee;
   padding: 20px;
   border-radius: 15px;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.05);
-  overflow-x: auto;
   box-shadow: 12px 12px 2px 1px rgba(0, 0, 0, 0.5);
+  overflow-x: auto;
+  margin: 0;
 }
 
 code {

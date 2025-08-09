@@ -37,7 +37,7 @@ Returns an RSS feed based on a list of public repository for GitHub users.
 #### API URL for GitHub
 
 ``` {.code-container}
-%API_DOMAIN%/api/github?user=example
+%API_DOMAIN%/api/github?user=
 ```
 
 ::: description
@@ -57,7 +57,7 @@ Returns an RSS feed of a user's NPM packages.
 #### API URL for NPM
 
 ``` {.code-container}
-%API_DOMAIN%/api/npm?user=example
+%API_DOMAIN%/api/npm?user=
 ```
 
 ::: description
