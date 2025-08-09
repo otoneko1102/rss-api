@@ -80,12 +80,8 @@ code.code-container {
   border-radius: 8px;
   cursor: pointer;
   font-size: 12px;
-  opacity: 0;
-  transition: all 0.2s ease-in-out;
-}
-
-pre:hover .copy-button {
   opacity: 1;
+  transition: all 0.2s ease-in-out;
 }
 
 .copy-button:hover {
