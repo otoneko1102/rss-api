@@ -17,7 +17,7 @@
     "markdown-it": "^14.1.0",
     "markdown-it-attrs": "^4.3.1",
     "markdown-it-container": "^4.0.0",
-    "node-fetch": "^2.7.0",
+    "node-fetch": "^3.3.2",
     "rss": "^1.2.2"
   }
 }
