@@ -15,7 +15,7 @@
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "markdown-it": "^14.1.1",
-    "markdown-it-attrs": "^4.3.1",
+    "markdown-it-attrs": "^5.0.0",
     "markdown-it-container": "^4.0.0",
     "node-fetch": "^2.7.0",
     "rss": "^1.2.2"
