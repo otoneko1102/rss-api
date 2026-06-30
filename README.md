@@ -3,7 +3,10 @@
 Unofficial RSS feeds for various services.  
 All endpoints are [here](https://rss.oto.im/).
 
+> [Hono](https://hono.dev) & [hono-feed](https://github.com/otnc/hono-feed) are used.
+
 ## Nginx Example
+
 ```conf
 server {
     listen 80;
