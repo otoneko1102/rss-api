@@ -67,7 +67,7 @@ connpass.get("/", async (c) => {
       });
     });
 
-    return serveFeed(c, feed);
+    return serveFeed(c, feed, { pretty: true });
   } catch (error) {
     if (error instanceof HTTPError) {
       console.error("Failed to fetch from connpass:", error.message);
