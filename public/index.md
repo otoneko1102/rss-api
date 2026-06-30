@@ -50,6 +50,31 @@ Param:
 
 :::
 
+### X (Twitter) User Tweets
+
+Returns an RSS feed of a user's tweets via FxTwitter.
+
+#### API URL for X (Twitter)
+
+``` {.code-container}
+%API_DOMAIN%/api/twitter?user=
+```
+
+::: description
+
+Endpoint: `/api/twitter`  
+Method: `GET`  
+Param:
+
+- `user<string>` - X (Twitter) Username
+- `count<number>` - Number of items to fetch (1–100, default: 90)
+- `with_replies<0|1>` - Include replies (default: 0)
+- `safe<0|1>` - Hide sensitive content (default: 0)
+- `lang<string>` - Translate tweets to this language code (e.g. `ja`, `en`)
+- `media<0|1>` - Return media posts only (default: 0)
+
+:::
+
 ### NPM User Packages
 
 Returns an RSS feed of a user's NPM packages.
