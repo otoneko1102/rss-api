@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { Feed, toRSS } from "hono-feed";
+import { Feed, serveFeed } from "hono-feed";
 import ky, { HTTPError } from "ky";
 import { API_DOMAIN } from "../lib/config.js";
 
@@ -55,8 +55,7 @@ npm.get("/", async (c) => {
       });
     }
 
-    const xml = toRSS(feed.toInput(), { pretty: true });
-    return c.body(xml, 200, { "Content-Type": "application/rss+xml" });
+    return serveFeed(c, feed);
   } catch (error) {
     if (error instanceof HTTPError) {
       console.error("Failed to fetch from NPM registry:", error.message);
