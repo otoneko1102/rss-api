@@ -1,7 +1,7 @@
+import * as cheerio from "cheerio";
 import { Hono } from "hono";
 import { Feed, serveFeed } from "hono-feed";
 import ky, { HTTPError } from "ky";
-import * as cheerio from "cheerio";
 import { API_DOMAIN } from "../lib/config.js";
 
 const connpass = new Hono();
@@ -50,9 +50,7 @@ connpass.get("/", async (c) => {
         .find(".event_label_area .label_status_tag")
         .map((_i, tag) => $(tag).text().trim())
         .get();
-      const dateStr = eventElement
-        .find(".dtstart .value-title")
-        .attr("title");
+      const dateStr = eventElement.find(".dtstart .value-title").attr("title");
 
       let description = "";
       if (group) description += `<b>団体:</b> ${group}<br>`;

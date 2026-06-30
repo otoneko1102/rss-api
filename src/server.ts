@@ -1,14 +1,14 @@
 import "dotenv/config";
-import { readFileSync } from "fs";
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
-import { Hono } from "hono";
-import { cors } from "hono/cors";
+import { readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { serve } from "@hono/node-server";
 import { serveStatic } from "@hono/node-server/serve-static";
+import { Hono } from "hono";
+import { cors } from "hono/cors";
 import MarkdownIt from "markdown-it";
-import mdContainer from "markdown-it-container";
 import mdAttrs from "markdown-it-attrs";
+import mdContainer from "markdown-it-container";
 import { API_DOMAIN } from "./lib/config.js";
 import api from "./routes/api.js";
 

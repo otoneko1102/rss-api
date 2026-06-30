@@ -1,7 +1,7 @@
 import { Hono } from "hono";
+import connpass from "./connpass.js";
 import github from "./github.js";
 import npm from "./npm.js";
-import connpass from "./connpass.js";
 
 const api = new Hono();
 
